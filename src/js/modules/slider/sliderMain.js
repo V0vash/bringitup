@@ -1,14 +1,9 @@
-import {$$} from './services/wrapQ';
+import Slider from './slider';
 
-
-export default class Slider {
-    constructor(page, btns) {
-        this.page = $$(page);
-        this.slides = this.page.children;
-        this.btns = $$(btns);
-        this.slideIndex = 1;
+export default class MainSlider extends Slider{
+    constructor(page, btns){
+        super(page, btns);
     }
-
     showSlides(n){
         if(n > this.slides.length){
             this.slideIndex = 1;
@@ -61,5 +56,4 @@ export default class Slider {
         
         this.showSlides(this.slideIndex);
     }
-
 }
