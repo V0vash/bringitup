@@ -5,7 +5,7 @@ export default class MiniSlider extends Slider{
     constructor(container, next, prev, activeClass, animate, autoplay){
         super(container, next, prev, activeClass, animate, autoplay);
     }
-
+    
     decorizeSlides(){
         this.slides.forEach(slide =>{
             slide.classList.remove(this.activeClass);
@@ -22,28 +22,27 @@ export default class MiniSlider extends Slider{
         }
     }
 
+    skipBtns(btn, amountOfClicks){
 
+        if (this.slides[0].tagName === 'BUTTON') {
+            for (let i = 0; i < amountOfClicks; i++) {
+               btn.click();
+            }
+         }
+    }
     bindTriggers(){
         this.next.addEventListener('click', () =>{
             this.container.appendChild(this.slides[0]);
             this.decorizeSlides();
 
-            if (this.slides[0].tagName === 'BUTTON') {
-                for (let i = 0; i < 2; i++) {
-                   this.next.click();
-                }
-             }
+            this.skipBtns(this.next, 2);
         });
         this.prev.addEventListener('click', () =>{
             let lastSlide = this.slides[this.slides.length - 1];
             this.container.insertBefore(lastSlide, this.slides[0]);
             this.decorizeSlides();
 
-            if (this.slides[0].tagName === 'BUTTON') {
-                for (let i = 0; i < 2; i++) {
-                   this.prev.click();
-                }
-             }
+            this.skipBtns(this.prev, 2);
         });
     }
 
