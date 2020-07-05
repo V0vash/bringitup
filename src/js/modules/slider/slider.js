@@ -1,11 +1,22 @@
 import {$$} from '../services/wrapQ';
 
-
 export default class Slider {
-    constructor({page = '', btns = '', next ='', prev = ''}={}) {
-        this.page = $$(page);
-        this.slides = this.page.children;
+    constructor({
+        container = null,
+        btns = null,
+        next = null,
+        prev = null,
+        activeClass = '',
+        animate,
+        autoplay }={}) {
+        this.container = $$(container);
+        this.slides = this.container.children;
         this.btns = $$(btns);
+        this.next = $$(next);
+        this.prev = $$(prev);
+        this.activeClass = activeClass;
+        this.animate = animate;
+        this.autoplay = autoplay;
         this.slideIndex = 1;
     }
 

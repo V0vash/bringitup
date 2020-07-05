@@ -1,11 +1,40 @@
 import MainSlider from './modules/slider/sliderMain';
+import MiniSlider from './modules/slider/sliderMini';
 import playVideo from './modules/playVideo';
+import {$$} from './modules/services/wrapQ';
 
 window.addEventListener('DOMContentLoaded', () => {
 
-    const slider = new MainSlider({page:'.page', btns:'.next'});
-    slider.render();
+    const mainSlider = new MainSlider({container:'.page', btns:'.next'});
+    mainSlider.render();
+
+    const showUpSlider = new MiniSlider({
+        container:'.showup__content-slider',
+        next:'.showup__next',
+        prev:'.showup__prev',
+        activeClass: 'card-active',
+        animate: true
+    });
+    showUpSlider.init();
+    
+    const modulesSlider = new MiniSlider({
+        container:'.modules__content-slider',
+        next:'.modules__info-btns .slick-next',
+        prev:'.modules__info-btns .slick-prev',
+        activeClass: 'card-active',
+        animate: true
+    });
+    modulesSlider.init();
+
+    const feedSlider = new MiniSlider({
+        container:'.feed__slider',
+        next:'.feed__slider .slick-next',
+        prev:'.feed__slider .slick-prev',
+        activeClass:'feed__item-active'
+    });
+    feedSlider.init();
 
     const popupPlayer = new playVideo ('.play', '.overlay');
     popupPlayer.init();
+
 });
