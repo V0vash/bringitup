@@ -30,13 +30,17 @@ export default class MiniSlider extends Slider{
             }
          }
     }
-    bindTriggers(){
-        this.next.addEventListener('click', () =>{
-            this.container.appendChild(this.slides[0]);
-            this.decorizeSlides();
 
-            this.skipBtns(this.next, 2);
-        });
+    nextSlide(){
+        this.container.appendChild(this.slides[0]);
+        this.decorizeSlides();
+
+        this.skipBtns(this.next, 2);
+    }
+
+    bindTriggers(){
+        this.next.addEventListener('click', () =>this.nextSlide());
+
         this.prev.addEventListener('click', () =>{
             let lastSlide = this.slides[this.slides.length - 1];
             this.container.insertBefore(lastSlide, this.slides[0]);
@@ -45,6 +49,28 @@ export default class MiniSlider extends Slider{
             this.skipBtns(this.prev, 2);
         });
     }
+
+    activateAutoplay(delay){
+        if(this.autoplay == true){
+
+            let autoplay = setInterval(() => this.nextSlide(), delay);
+
+            const stopTriggers = [this.next, this.prev, ...this.slides];
+
+            stopTriggers.forEach(slide =>{
+                slide.addEventListener('mouseenter', () =>{
+                    clearInterval(autoplay);
+                });
+            });
+            
+            stopTriggers.forEach(slide =>{
+                slide.addEventListener('mouseleave', () =>{
+                    autoplay = setInterval(() => this.nextSlide(), delay);
+                });
+            });
+        }
+    }
+    
 
     init(){
         this.container.style.cssText=`
@@ -56,5 +82,8 @@ export default class MiniSlider extends Slider{
 
         this.bindTriggers();
         this.decorizeSlides();
+        this.activateAutoplay(5000);
+
+
     }
 }
