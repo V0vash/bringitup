@@ -1,7 +1,7 @@
 import MainSlider from './modules/slider/sliderMain';
 import MiniSlider from './modules/slider/sliderMini';
 import playVideo from './modules/playVideo';
-import {$$} from './modules/services/wrapQ';
+import Difference from './modules/difference';
 
 window.addEventListener('DOMContentLoaded', () => {
 
@@ -38,4 +38,5 @@ window.addEventListener('DOMContentLoaded', () => {
     const popupPlayer = new playVideo ('.play', '.overlay');
     popupPlayer.init();
 
+    new Difference('.officerold', '.officernew', '.officer__card-item').init();
 });

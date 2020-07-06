@@ -83,7 +83,5 @@ export default class MiniSlider extends Slider{
         this.bindTriggers();
         this.decorizeSlides();
         this.activateAutoplay(5000);
-
-
     }
 }
