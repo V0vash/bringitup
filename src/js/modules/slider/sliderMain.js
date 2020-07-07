@@ -2,9 +2,10 @@ import {$$} from '../services/wrapQ';
 import Slider from './slider';
 
 export default class MainSlider extends Slider{
-    constructor(btns){
-        super(btns);
+    constructor(btns, next, prev){
+        super(btns, prev, next);
     }
+
     showSlides(n){
         if(n > this.slides.length){
             this.slideIndex = 1;
@@ -38,10 +39,7 @@ export default class MainSlider extends Slider{
         this.showSlides(this.slideIndex += n);
     }
 
-    render(){
-        try{
-            this.hanson = $$('.hanson');
-        }catch(e){}
+    bindTriggers(){
 
         this.btns.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -54,7 +52,35 @@ export default class MainSlider extends Slider{
                 this.showSlides(this.showSlides);
             });
         });
+
+    try{
+        this.next.forEach(btn =>{
+            btn.addEventListener('click', (e) =>{
+                e.stopPropagation();
+                e.preventDefault();
+                this.plusSlides(1);
+            });
+        });
+
+        this.prev.forEach(btn =>{
+            btn.addEventListener('click', (e) =>{
+                e.stopPropagation();
+                e.preventDefault();
+                this.plusSlides(-1);
+            });
+        });
+    }catch(e){}
         
-        this.showSlides(this.slideIndex);
+    }
+
+    render(){
+        if(this.container){
+            try{
+                this.hanson = $$('.hanson');
+            }catch(e){}
+            
+            this.showSlides(this.slideIndex);
+            this.bindTriggers();
+        }
     }
 }

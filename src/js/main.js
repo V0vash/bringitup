@@ -42,4 +42,13 @@ window.addEventListener('DOMContentLoaded', () => {
     new Difference('.officerold', '.officernew', '.officer__card-item').init();
 
     new Forms('.form').init();
+
+    //modules 
+
+    
+    const modulePageSlider = new MainSlider({container: '.moduleapp',
+     btns: '.next',
+     next:'.nextmodule',
+     prev:'.prevmodule'});
+    modulePageSlider.render();
 });

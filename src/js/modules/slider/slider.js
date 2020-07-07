@@ -10,7 +10,7 @@ export default class Slider {
         animate,
         autoplay }={}) {
         this.container = $$(container);
-        this.slides = this.container.children;
+        try{this.slides = this.container.children;}catch(e){}
         this.btns = $$(btns);
         this.next = $$(next);
         this.prev = $$(prev);

@@ -2,13 +2,15 @@ import {$$} from './services/wrapQ';
 
 export default class Difference {
     constructor(oldOfficer, newOfficer, items){
-        this.oldOfficer = $$(oldOfficer);
-        this.oldItems = $$(items, this.oldOfficer);
-        this.newOfficer = $$(newOfficer);
-        this.newItems = $$(items, this.newOfficer);
-
-        this.oldCounter = 0;
-        this.newCounter = 0;
+        try{
+            this.oldOfficer = $$(oldOfficer);
+            this.oldItems = $$(items, this.oldOfficer);
+            this.newOfficer = $$(newOfficer);
+            this.newItems = $$(items, this.newOfficer);
+    
+            this.oldCounter = 0;
+            this.newCounter = 0;
+        }catch(e){}
     }
 
     hideItems(items){
@@ -36,10 +38,12 @@ export default class Difference {
 
 
     init(){
+        try{
         this.hideItems(this.oldItems);
         this.bindTriggers(this.oldOfficer, this.oldItems, this.oldCounter);
         this.hideItems(this.newItems);
         this.bindTriggers(this.newOfficer, this.newItems, this.newCounter);
+        }catch(e){}
 
     }
 

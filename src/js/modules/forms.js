@@ -2,7 +2,7 @@ import {$$} from './services/wrapQ';
 
 export default class Forms {
     constructor(forms){
-        this.forms = $$(forms);
+        this.forms = document.querySelectorAll(forms);
         this.inputs = $$('input');
         this.url = 'assets/question.php';
         this.message = {
@@ -34,7 +34,7 @@ export default class Forms {
     }
 
     checkEmailInput() {
-        const emailInputs = $$('[name="email"]');
+        const emailInputs = document.getElementsByName("email");
 
         emailInputs.forEach(input => {
             input.addEventListener('keypress', function (e) {
@@ -62,8 +62,7 @@ export default class Forms {
             }
         };
 
-        let inputs = $$('[name="phone"]');
-
+        let inputs = document.getElementsByName("phone");
         inputs.forEach(input => {
             input.addEventListener('input', createMask);
             input.addEventListener('focus', createMask);

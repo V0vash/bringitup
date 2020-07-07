@@ -5294,7 +5294,15 @@ window.addEventListener('DOMContentLoaded', function () {
   var popupPlayer = new _modules_playVideo__WEBPACK_IMPORTED_MODULE_2__["default"]('.play', '.overlay');
   popupPlayer.init();
   new _modules_difference__WEBPACK_IMPORTED_MODULE_3__["default"]('.officerold', '.officernew', '.officer__card-item').init();
-  new _modules_forms__WEBPACK_IMPORTED_MODULE_4__["default"]('.form').init();
+  new _modules_forms__WEBPACK_IMPORTED_MODULE_4__["default"]('.form').init(); //modules 
+
+  var modulePageSlider = new _modules_slider_sliderMain__WEBPACK_IMPORTED_MODULE_0__["default"]({
+    container: '.moduleapp',
+    btns: '.next',
+    next: '.nextmodule',
+    prev: '.prevmodule'
+  });
+  modulePageSlider.render();
 });
 
 /***/ }),
@@ -5328,12 +5336,14 @@ function () {
   function Difference(oldOfficer, newOfficer, items) {
     _classCallCheck(this, Difference);
 
-    this.oldOfficer = Object(_services_wrapQ__WEBPACK_IMPORTED_MODULE_1__["$$"])(oldOfficer);
-    this.oldItems = Object(_services_wrapQ__WEBPACK_IMPORTED_MODULE_1__["$$"])(items, this.oldOfficer);
-    this.newOfficer = Object(_services_wrapQ__WEBPACK_IMPORTED_MODULE_1__["$$"])(newOfficer);
-    this.newItems = Object(_services_wrapQ__WEBPACK_IMPORTED_MODULE_1__["$$"])(items, this.newOfficer);
-    this.oldCounter = 0;
-    this.newCounter = 0;
+    try {
+      this.oldOfficer = Object(_services_wrapQ__WEBPACK_IMPORTED_MODULE_1__["$$"])(oldOfficer);
+      this.oldItems = Object(_services_wrapQ__WEBPACK_IMPORTED_MODULE_1__["$$"])(items, this.oldOfficer);
+      this.newOfficer = Object(_services_wrapQ__WEBPACK_IMPORTED_MODULE_1__["$$"])(newOfficer);
+      this.newItems = Object(_services_wrapQ__WEBPACK_IMPORTED_MODULE_1__["$$"])(items, this.newOfficer);
+      this.oldCounter = 0;
+      this.newCounter = 0;
+    } catch (e) {}
   }
 
   _createClass(Difference, [{
@@ -5363,10 +5373,12 @@ function () {
   }, {
     key: "init",
     value: function init() {
-      this.hideItems(this.oldItems);
-      this.bindTriggers(this.oldOfficer, this.oldItems, this.oldCounter);
-      this.hideItems(this.newItems);
-      this.bindTriggers(this.newOfficer, this.newItems, this.newCounter);
+      try {
+        this.hideItems(this.oldItems);
+        this.bindTriggers(this.oldOfficer, this.oldItems, this.oldCounter);
+        this.hideItems(this.newItems);
+        this.bindTriggers(this.newOfficer, this.newItems, this.newCounter);
+      } catch (e) {}
     }
   }]);
 
@@ -5424,7 +5436,7 @@ function () {
   function Forms(forms) {
     _classCallCheck(this, Forms);
 
-    this.forms = Object(_services_wrapQ__WEBPACK_IMPORTED_MODULE_7__["$$"])(forms);
+    this.forms = document.querySelectorAll(forms);
     this.inputs = Object(_services_wrapQ__WEBPACK_IMPORTED_MODULE_7__["$$"])('input');
     this.url = 'assets/question.php';
     this.message = {
@@ -5481,7 +5493,7 @@ function () {
   }, {
     key: "checkEmailInput",
     value: function checkEmailInput() {
-      var emailInputs = Object(_services_wrapQ__WEBPACK_IMPORTED_MODULE_7__["$$"])('[name="email"]');
+      var emailInputs = document.getElementsByName("email");
       emailInputs.forEach(function (input) {
         input.addEventListener('keypress', function (e) {
           if (e.key.match(/[^a-z A-Z 0-9 @ \.]/ig)) {
@@ -5507,7 +5519,7 @@ function () {
         }
       };
 
-      var inputs = Object(_services_wrapQ__WEBPACK_IMPORTED_MODULE_7__["$$"])('[name="phone"]');
+      var inputs = document.getElementsByName("phone");
       inputs.forEach(function (input) {
         input.addEventListener('input', createMask);
         input.addEventListener('focus', createMask);
@@ -5729,7 +5741,11 @@ var Slider = function Slider() {
   _classCallCheck(this, Slider);
 
   this.container = Object(_services_wrapQ__WEBPACK_IMPORTED_MODULE_0__["$$"])(container);
-  this.slides = this.container.children;
+
+  try {
+    this.slides = this.container.children;
+  } catch (e) {}
+
   this.btns = Object(_services_wrapQ__WEBPACK_IMPORTED_MODULE_0__["$$"])(btns);
   this.next = Object(_services_wrapQ__WEBPACK_IMPORTED_MODULE_0__["$$"])(next);
   this.prev = Object(_services_wrapQ__WEBPACK_IMPORTED_MODULE_0__["$$"])(prev);
@@ -5809,10 +5825,10 @@ var MainSlider =
 function (_Slider) {
   _inherits(MainSlider, _Slider);
 
-  function MainSlider(btns) {
+  function MainSlider(btns, next, prev) {
     _classCallCheck(this, MainSlider);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(MainSlider).call(this, btns));
+    return _possibleConstructorReturn(this, _getPrototypeOf(MainSlider).call(this, btns, prev, next));
   }
 
   _createClass(MainSlider, [{
@@ -5854,13 +5870,9 @@ function (_Slider) {
       this.showSlides(this.slideIndex += n);
     }
   }, {
-    key: "render",
-    value: function render() {
+    key: "bindTriggers",
+    value: function bindTriggers() {
       var _this2 = this;
-
-      try {
-        this.hanson = Object(_services_wrapQ__WEBPACK_IMPORTED_MODULE_9__["$$"])('.hanson');
-      } catch (e) {}
 
       this.btns.forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -5873,7 +5885,37 @@ function (_Slider) {
           _this2.showSlides(_this2.showSlides);
         });
       });
-      this.showSlides(this.slideIndex);
+
+      try {
+        this.next.forEach(function (btn) {
+          btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+
+            _this2.plusSlides(1);
+          });
+        });
+        this.prev.forEach(function (btn) {
+          btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+
+            _this2.plusSlides(-1);
+          });
+        });
+      } catch (e) {}
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      if (this.container) {
+        try {
+          this.hanson = Object(_services_wrapQ__WEBPACK_IMPORTED_MODULE_9__["$$"])('.hanson');
+        } catch (e) {}
+
+        this.showSlides(this.slideIndex);
+        this.bindTriggers();
+      }
     }
   }]);
 
@@ -6054,10 +6096,12 @@ function (_Slider) {
   }, {
     key: "init",
     value: function init() {
-      this.container.style.cssText = "\n        display: flex;\n        flex-wrap: wrap;\n        overflow: hidden;\n        allign-item: flex-start;\n        ";
-      this.bindTriggers();
-      this.decorizeSlides();
-      this.activateAutoplay(5000);
+      try {
+        this.container.style.cssText = "\n            display: flex;\n            flex-wrap: wrap;\n            overflow: hidden;\n            allign-item: flex-start;\n            ";
+        this.bindTriggers();
+        this.decorizeSlides();
+        this.activateAutoplay(5000);
+      } catch (e) {}
     }
   }]);
 
