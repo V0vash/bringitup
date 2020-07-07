@@ -8,6 +8,6 @@ let $$ = (selector, base = document) => {
     }else{
         return elements;
     }
-}
+};
 
 export {$$};

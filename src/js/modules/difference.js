@@ -22,9 +22,11 @@ export default class Difference {
     bindTriggers(container, items, counter){
         $$('.plus', container).addEventListener('click', () =>{
             if(counter !== items.length - 2){
+                items[counter].classList.add('animated', 'fadeIn');
                 items[counter].style.display = 'flex';
                 counter++;
             } else {
+                items[counter].classList.add('animated', 'fadeIn');
                 items[counter].style.display = 'flex';
                 items[items.length - 1].remove();
             }
