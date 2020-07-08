@@ -1,5 +1,3 @@
-import {$$} from './services/wrapQ';
-
 export default class Difference {
     constructor(oldOfficer, newOfficer, items){
         try{

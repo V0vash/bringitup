@@ -1,3 +1,5 @@
+import wrapQ from './modules/services/wrapQ';
+
 import MainSlider from './modules/slider/sliderMain';
 import MiniSlider from './modules/slider/sliderMini';
 import playVideo from './modules/playVideo';

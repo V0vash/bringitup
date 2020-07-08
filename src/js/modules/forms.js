@@ -1,5 +1,3 @@
-import {$$} from './services/wrapQ';
-
 export default class Forms {
     constructor(forms){
         this.forms = document.querySelectorAll(forms);

@@ -1,5 +1,3 @@
-import {$$} from '../modules/services/wrapQ';
-
 export default class Download{
     constructor(triggers){
         this.btns = $$(triggers);
@@ -21,12 +19,14 @@ export default class Download{
     }
 
     init(){
-        this.btns.forEach(item =>{
-            item.addEventListener('click', (e) =>{
-                e.preventDefault();
-                e.stopPropagation();
-                this.downloadFile(this.path);
+        try{
+            this.btns.forEach(item =>{
+                item.addEventListener('click', (e) =>{
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.downloadFile(this.path);
+                });
             });
-        });
+        }catch(e){};
     }
 }

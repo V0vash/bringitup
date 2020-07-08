@@ -10,4 +10,5 @@ let $$ = (selector, base = document) => {
     }
 };
 
+window.$$ = $$;
 export {$$};

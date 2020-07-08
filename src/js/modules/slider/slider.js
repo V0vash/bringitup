@@ -1,5 +1,3 @@
-import {$$} from '../services/wrapQ';
-
 export default class Slider {
     constructor({
         container = null,

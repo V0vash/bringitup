@@ -1,4 +1,3 @@
-import {$$} from '../services/wrapQ';
 import Slider from './slider';
 
 export default class MainSlider extends Slider{

@@ -1,6 +1,3 @@
-import {$$} from './services/wrapQ';
-
-
 export default class VideoPlayer {
     constructor(triggers, popup) {
         this.btns = $$(triggers);
