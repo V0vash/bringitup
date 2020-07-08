@@ -3,6 +3,8 @@ import MiniSlider from './modules/slider/sliderMini';
 import playVideo from './modules/playVideo';
 import Difference from './modules/difference';
 import Forms from './modules/forms';
+import ShowInfo from './modules/showInfo';
+import Download from './modules/download';
 
 window.addEventListener('DOMContentLoaded', () => {
 
@@ -52,4 +54,8 @@ window.addEventListener('DOMContentLoaded', () => {
     modulePageSlider.render();
 
     new playVideo('.module__video-item .play', '.overlay').init();
+
+    new ShowInfo('.module__info-show .plus').init();
+
+    new Download('.download').init();
 });
