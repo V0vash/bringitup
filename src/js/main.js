@@ -36,8 +36,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
     feedSlider.init();
 
-    const popupPlayer = new playVideo ('.play', '.overlay');
-    popupPlayer.init();
+    new playVideo ('.page .play', '.overlay').init();
 
     new Difference('.officerold', '.officernew', '.officer__card-item').init();
 
@@ -51,4 +50,6 @@ window.addEventListener('DOMContentLoaded', () => {
      next:'.nextmodule',
      prev:'.prevmodule'});
     modulePageSlider.render();
+
+    new playVideo('.module__video-item .play', '.overlay').init();
 });
